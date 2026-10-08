@@ -16,8 +16,9 @@ export const fetchApi = async (endpoint, options = {}) => {
         config.headers['x-csrf-token'] = csrfToken;
     }
   }
-
-  const response = await fetch(`/api/neon${endpoint}`, config);
+  // Use absolute Vercel URL in production since frontend is on Hostinger
+  const API_BASE_URL = import.meta.env.PROD ? 'https://huzaifa-traders-two-seven.vercel.app' : '';
+  const response = await fetch(`${API_BASE_URL}/api/neon${endpoint}`, config);
   const data = await response.json();
 
   if (!response.ok) {
