@@ -1,0 +1,5 @@
+import pool from '../db/pool.js';
+import eventBus from '../realtime/eventBus.js';
+export const getBusinessDetails = async () => { const { rows } = await pool.query('SELECT * FROM business_details LIMIT 1'); eventBus.emit('update', { resource: 'business_details' }); return rows[0]; };
+export const updateBusinessDetails = async (id, details) => { const { rows } = await pool.query('UPDATE business_details SET email_key = $1, email_enabled = $2, address = $3, phone = $4, map_url = $5, whatsapp_api_key = $6 WHERE id = $7 RETURNING *', [details.email_key, details.email_enabled, details.address, details.phone, details.map_url, details.whatsapp_api_key, id]); eventBus.emit('update', { resource: 'business_details' }); return rows[0]; };
+export const createBusinessDetails = async (details) => { const { rows } = await pool.query('INSERT INTO business_details (email_key, email_enabled, whatsapp_api_key) VALUES ($1, $2, $3) RETURNING *', [details.email_key, details.email_enabled, details.whatsapp_api_key]); eventBus.emit('update', { resource: 'business_details' }); return rows[0]; };

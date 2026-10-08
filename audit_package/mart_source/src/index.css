@@ -1,0 +1,325 @@
+:root {
+  --primary: #059669;
+  --primary-hover: #047857;
+  --bg-color: #F8FAFC;
+  --text-main: #0F172A;
+  --text-muted: #64748B;
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+  --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Utilities */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(5, 150, 105, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Layout overrides */
+#root {
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.hero-section {
+  position: relative;
+  background-image: url('/hero_bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 550px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to right, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.6) 40%, transparent 100%);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+}
+
+.hero-title {
+  color: #F8FAFC !important;
+}
+
+.hero-subtitle {
+  color: #E2E8F0 !important;
+}
+
+/* Dark Mode Theme */
+[data-theme='dark'] {
+  --bg-color: #0F172A;
+  --text-main: #F8FAFC;
+  --text-muted: #94A3B8;
+  --glass-bg: rgba(15, 23, 42, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+}
+
+body {
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure cards and inputs respect dark mode */
+[data-theme='dark'] .product-card,
+[data-theme='dark'] .glass,
+[data-theme='dark'] .search-bar,
+[data-theme='dark'] .search-input {
+  background-color: var(--glass-bg);
+  color: var(--text-main);
+  border-color: var(--glass-border);
+}
+
+/* New Arrival Badge */
+.new-arrival-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #3B82F6;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 12px;
+  z-index: 10;
+  animation: fadeIn 0.8s ease-out forwards;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Product Image Zoom */
+.product-image-wrapper {
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+
+.product-image-wrapper img {
+  transition: transform 0.4s ease;
+}
+
+@media (hover: hover) {
+  .product-image-wrapper:hover img {
+    transform: scale(1.1);
+  }
+}
+
+/* WhatsApp Pulse Animation */
+@keyframes pulse-whatsapp {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+.whatsapp-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25D366;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 1000;
+  animation: pulse-whatsapp 2s infinite;
+  transition: transform 0.3s ease;
+}
+.whatsapp-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Back to Top Button */
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: var(--text-main);
+  color: var(--bg-color);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+}
+.back-to-top:hover {
+  transform: translateY(-5px);
+}
+
+/* Map Section */
+.map-section {
+  padding: 3rem 0;
+  background-color: var(--bg-color);
+}
+.map-container {
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--glass-border);
+}
+
+/* --- Bug Fixes --- */
+/* Fix Cart Drawer / Menu Drawer in Dark Mode (was white text on white bg) */
+[data-theme='dark'] .cart-drawer {
+  background-color: var(--bg-color) !important;
+  color: var(--text-main);
+}
+[data-theme='dark'] .cart-drawer hr {
+  border-color: var(--glass-border) !important;
+}
+
+/* Fix Category Pills in Dark Mode (was white text on white bg) */
+[data-theme='dark'] .category-pill {
+  background-color: var(--glass-bg) !important;
+  color: var(--text-main);
+  border-color: var(--glass-border) !important;
+}
+[data-theme='dark'] .category-pill:hover,
+[data-theme='dark'] .category-pill.active {
+  background-color: var(--primary) !important;
+  color: white !important;
+  border-color: var(--primary) !important;
+}
+
+/* Fully Responsive Floating Buttons Fixes */
+/* Prevent floating buttons from overlapping with mobile bottom nav or desktop elements */
+.whatsapp-btn, .back-to-top {
+  bottom: clamp(90px, 12vh, 100px) !important;
+}
+
+/* Make buttons scale gracefully */
+.whatsapp-btn {
+  width: clamp(50px, 5vw, 60px) !important;
+  height: clamp(50px, 5vw, 60px) !important;
+}
+.whatsapp-btn svg {
+  width: clamp(24px, 3vw, 32px) !important;
+  height: clamp(24px, 3vw, 32px) !important;
+}
+.back-to-top {
+  width: clamp(45px, 4vw, 50px) !important;
+  height: clamp(45px, 4vw, 50px) !important;
+}
+

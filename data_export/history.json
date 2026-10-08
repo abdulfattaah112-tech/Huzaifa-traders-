@@ -1,0 +1,25 @@
+[
+  {
+    "id": "02e4f115-801e-4d66-8186-fafe805051ca",
+    "date": "2026-08-13",
+    "day": "Thursday",
+    "totalStock": 152,
+    "totalItemsSold": 2,
+    "soldItems": [
+      {
+        "name": "بر ش",
+        "price": 170,
+        "quantity": 1
+      },
+      {
+        "name": "واپر",
+        "price": 200,
+        "quantity": 1
+      }
+    ],
+    "salesAmount": 370,
+    "earnings": 370,
+    "outOfStockItems": 0,
+    "createdAt": "2026-08-13T11:37:09.789948+00:00"
+  }
+]

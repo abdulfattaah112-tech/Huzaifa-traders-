@@ -1,0 +1,26 @@
+[
+  {
+    "id": "c78c414f-71a3-4b51-9839-b2fa753ebf0e",
+    "name": "Kodu Jharu",
+    "active": true,
+    "created_at": "2026-07-25T14:18:01.498008+00:00"
+  },
+  {
+    "id": "f6585850-d781-4dce-860c-d66b77745adc",
+    "name": "Phool Jharu",
+    "active": false,
+    "created_at": "2026-07-25T14:18:01.498008+00:00"
+  },
+  {
+    "id": "6f43e855-2764-411a-b55c-7b958db3a5c5",
+    "name": "Brush",
+    "active": false,
+    "created_at": "2026-07-25T14:18:01.498008+00:00"
+  },
+  {
+    "id": "facafbe8-ff42-4b07-8b58-c2881a28f00a",
+    "name": "Wiper",
+    "active": false,
+    "created_at": "2026-07-25T14:18:01.498008+00:00"
+  }
+]
