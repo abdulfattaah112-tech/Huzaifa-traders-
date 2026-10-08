@@ -17,7 +17,7 @@ export const fetchApi = async (endpoint, options = {}) => {
     }
   }
   // Use absolute Vercel URL in production since frontend is on Hostinger
-  const API_BASE_URL = import.meta.env.PROD ? 'https://huzaifa-traders-two-seven.vercel.app' : '';
+  const API_BASE_URL = "";
   const response = await fetch(`${API_BASE_URL}/api/neon${endpoint}`, config);
   const data = await response.json();
 

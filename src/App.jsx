@@ -396,7 +396,7 @@ function App() {
   // Sync currentView with Browser History for Mobile Back Button
   useEffect(() => {
     // Require admin password on every refresh by logging out on mount
-    fetch((import.meta.env.PROD ? "https://huzaifa-traders-two-seven.vercel.app" : "") + "/api/admin/logout", { method: 'POST' }).catch(() => {});
+    fetch("/api/admin/logout", { method: 'POST' }).catch(() => {});
     setIsAdminAuthenticated(false);
     localStorage.removeItem("freshmart_admin_hint");
   }, []);
@@ -561,7 +561,7 @@ function App() {
   
   // Load real profile on mount
   useEffect(() => {
-    fetch((import.meta.env.PROD ? "https://huzaifa-traders-two-seven.vercel.app" : "") + "/api/neon/auth/profile")
+    fetch("/api/neon/auth/profile")
       .then(res => res.json())
       .then(data => {
         if (data.success) {
@@ -659,7 +659,7 @@ function App() {
 
   const handleAdminLogout = async () => {
     try {
-      await fetch((import.meta.env.PROD ? "https://huzaifa-traders-two-seven.vercel.app" : "") + "/api/admin/logout", { method: 'POST' });
+      await fetch("/api/admin/logout", { method: 'POST' });
     } catch (e) {
       console.error(e);
     }
@@ -670,7 +670,7 @@ function App() {
   const handleAdminLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch((import.meta.env.PROD ? "https://huzaifa-traders-two-seven.vercel.app" : "") + "/api/admin/login", {
+      const res = await fetch("/api/admin/login", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: adminUsernameInput, password: adminPasswordInput })
@@ -681,7 +681,7 @@ function App() {
         setAdminUsernameInput('');
         setAdminPasswordInput('');
         // Fetch CSRF token after login
-        const csrfRes = await fetch((import.meta.env.PROD ? "https://huzaifa-traders-two-seven.vercel.app" : "") + "/api/csrf-token", { cache: 'no-store' });
+        const csrfRes = await fetch("/api/csrf-token", { cache: 'no-store' });
         if (csrfRes.ok) {
           const csrfData = await csrfRes.json();
           window.csrfToken = csrfData.csrfToken;
@@ -1639,13 +1639,13 @@ function App() {
               </div>
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '1rem' }}>
                 <button className="btn-primary" style={{ backgroundColor: 'transparent', color: '#DC2626', border: '1px solid #FEE2E2' }} onClick={async () => {
-                  await fetch((import.meta.env.PROD ? "https://huzaifa-traders-two-seven.vercel.app" : "") + "/api/neon/auth/logout", { method: 'POST' });
+                  await fetch("/api/neon/auth/logout", { method: 'POST' });
                   setCustomerAuth({ isAuthenticated: false, user: null });
                   setUserProfile(null);
                 }}>Logout</button>
                 <button className="btn-primary" style={{ backgroundColor: 'transparent', color: 'var(--text-main)', border: '1px solid #E2E8F0' }} onClick={() => setCurrentView('home')}>Close</button>
                 <button className="btn-primary" onClick={async () => {
-                  const res = await fetch((import.meta.env.PROD ? "https://huzaifa-traders-two-seven.vercel.app" : "") + "/api/neon/auth/profile", {
+                  const res = await fetch("/api/neon/auth/profile", {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(userProfile)

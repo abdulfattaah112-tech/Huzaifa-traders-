@@ -2,6 +2,11 @@ import express from "express";
 import helmet from "helmet";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import { wafMiddleware, getSecurityLogs } from "./middleware/waf.js";
@@ -109,6 +114,12 @@ app.use("/api/neon/auth", neonAuthRoutes);
 // Dummy endpoint for rate limit testing
 app.post("/api/auth/test-rate-limit", (req, res) => {
   res.json({ success: true, message: "Request allowed" });
+});
+
+app.use(express.static(path.join(__dirname, "dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 app.listen(PORT, () => {
